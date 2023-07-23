@@ -15,6 +15,11 @@ class ExcercisePresenter(
         val exerciseList = view.getModel().getExerciseList()
         if (exerciseIndex < exerciseList.size) {
             val exercise = exerciseList[exerciseIndex]
+            if(exerciseIndex  %2 == 0){
+                for(i in 0 until 3){
+                    view.displayExercise(exercise)
+                }
+            }
             view.displayExercise(exercise)
 
             exerciseTimer = object : CountDownTimer((exercise.duration * 1000).toLong(), 1000) {

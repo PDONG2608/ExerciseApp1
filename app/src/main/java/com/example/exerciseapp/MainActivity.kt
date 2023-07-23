@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity(), ExerciseContract.View, TextToSpeech.On
     lateinit var textToSpeech: TextToSpeech
     private lateinit var mediaPlayer: MediaPlayer
     private var isExercising = false
+    private var isMusicPlaying = false
 
     private val model: ExerciseContract.ExerciseModel =
         ExerciseModelImpl() // Khởi tạo đối tượng ExerciseModelImpl
@@ -43,17 +44,24 @@ class MainActivity : AppCompatActivity(), ExerciseContract.View, TextToSpeech.On
         mediaPlayer.isLooping = true
         mediaPlayer.setVolume(0.5f,0.5f)
 
+        tvExerciseName.text = "Welcome to ExerciseApp"
         ivExerciseImage.setImageResource(R.drawable.mainimage)
         //Nut Start
         btnStart.setOnClickListener {
-            presenter.startExercise()
-            mediaPlayer.start()
+            if(!isMusicPlaying ||(isMusicPlaying && !mediaPlayer.isPlaying)){
+                mediaPlayer.start()
+                isMusicPlaying = true
+                presenter.startExercise()
+            }
         }
         //Nut Stop
         btnStop.setOnClickListener {
-            presenter.stopExercise()
-            mediaPlayer.stop()
-            tvExerciseTimer.text = ""
+            if(isMusicPlaying && mediaPlayer.isPlaying){
+                mediaPlayer.pause()
+                isMusicPlaying = false
+                tvExerciseTimer.text = ""
+                presenter.stopExercise()
+            }
         }
         //Nut Reset
         btnReset.setOnClickListener {
@@ -106,9 +114,18 @@ class MainActivity : AppCompatActivity(), ExerciseContract.View, TextToSpeech.On
         }
     }
 
-    @SuppressLint("MissingSuperCall")
     override fun onPause() {
-        mediaPlayer.stop()
+        super.onPause()
+        if(isMusicPlaying && mediaPlayer.isPlaying){
+            mediaPlayer.pause()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(isMusicPlaying){
+            mediaPlayer.start()
+        }
     }
 
     override fun onDestroy() {
