@@ -1,5 +1,6 @@
 package com.example.exerciseapp
 
+import android.annotation.SuppressLint
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -40,19 +41,21 @@ class MainActivity : AppCompatActivity(), ExerciseContract.View, TextToSpeech.On
 
         mediaPlayer = MediaPlayer.create(this,R.raw.music)
         mediaPlayer.isLooping = true
-        mediaPlayer.setVolume(0.7f,0.7f)
+        mediaPlayer.setVolume(0.5f,0.5f)
 
         ivExerciseImage.setImageResource(R.drawable.mainimage)
-
+        //Nut Start
         btnStart.setOnClickListener {
             presenter.startExercise()
             mediaPlayer.start()
         }
-
+        //Nut Stop
         btnStop.setOnClickListener {
             presenter.stopExercise()
+            mediaPlayer.stop()
+            tvExerciseTimer.text = ""
         }
-
+        //Nut Reset
         btnReset.setOnClickListener {
             presenter.stopExercise()
         }
@@ -62,7 +65,6 @@ class MainActivity : AppCompatActivity(), ExerciseContract.View, TextToSpeech.On
         tvExerciseName.text = exercise.name
         ivExerciseImage.setImageResource(exercise.imageResId)
         textToSpeech.speak(exercise.description, TextToSpeech.QUEUE_FLUSH,null, null)
-
     }
 
     override fun displayExerciseTime(time: String) {
@@ -92,7 +94,7 @@ class MainActivity : AppCompatActivity(), ExerciseContract.View, TextToSpeech.On
 
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) {
-            val result = textToSpeech.setLanguage(Locale.getDefault())
+            val result = textToSpeech.setLanguage(Locale.ENGLISH)
             if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Log.e("phuongdong", "Language no supported")
             } else {
@@ -104,9 +106,15 @@ class MainActivity : AppCompatActivity(), ExerciseContract.View, TextToSpeech.On
         }
     }
 
+    @SuppressLint("MissingSuperCall")
+    override fun onPause() {
+        mediaPlayer.stop()
+    }
+
     override fun onDestroy() {
         textToSpeech.stop()
         textToSpeech.shutdown()
+        mediaPlayer.stop()
         super.onDestroy()
     }
 }

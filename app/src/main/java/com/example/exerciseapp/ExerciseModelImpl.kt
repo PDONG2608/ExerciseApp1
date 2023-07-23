@@ -3,12 +3,13 @@ package com.example.exerciseapp
 class ExerciseModelImpl: ExerciseContract.ExerciseModel {
     override fun getExerciseList(): List<Exercise> {
        return listOf(
-           Exercise("Push-up", 20, R.drawable.chongday,"Làm tý chống đẩy nhể"),
-           Exercise("Rest", 20, R.drawable.img_4,"Anh à hãy giãn cơ 1 tý nhé"),
-           Exercise("Pull up bar", 20, R.drawable.img_5,"Đu càng 1 tay"),
-           Exercise("Rest", 20, R.drawable.img_4,"Anh à hãy giãn cơ 1 tý nhé"),
-           Exercise("Leg exercises", 20, R.drawable.img_6,"Làm tý chân đê"),
-           Exercise("Amazing gutchop anh!", 20, R.drawable.img_7,"Anh tuyệt vời lắm đấy")
+           Exercise("Are you Ready?", 4, R.drawable.areyouready,"Are you Ready"),
+           Exercise("Push-up", 11, R.drawable.chongday,"Exercise 1: Push up"),
+           Exercise("Rest", 11, R.drawable.img_4,"Take a break"),
+           Exercise("Pull up bar", 11, R.drawable.img_5,"Exercise 2: Pull up bar "),
+           Exercise("Rest", 11, R.drawable.img_4,"Take a break"),
+           Exercise("Leg exercises", 11, R.drawable.img_6,"Exercise 3: Leg exercises"),
+           Exercise("Amazing gutchop anh!", 11, R.drawable.img_7,"amazing, good job ")
        )
     }
 }
