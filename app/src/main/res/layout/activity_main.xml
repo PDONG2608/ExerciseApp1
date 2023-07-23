@@ -7,14 +7,15 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="16dp"
+    android:background="@drawable/bg_app"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/tvExerciseName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textColor="@color/white"
         android:textStyle="bold" />
 
     <ImageView
@@ -28,30 +29,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="48sp" />
 
     <Button
         android:id="@+id/btnStart"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Start"
+        android:textColor="@color/white"
+        android:background="@drawable/custom_button_background"
         android:textSize="30sp" />
 
     <Button
         android:id="@+id/btnStop"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Stop"
+        android:textColor="@color/white"
+        android:background="@drawable/custom_button_background"
         android:textSize="30sp" />
     <Button
         android:id="@+id/btnReset"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Reset"
+        android:background="@drawable/custom_button_background"
+        android:textColor="@color/white"
         android:textSize="30sp" />
 
 

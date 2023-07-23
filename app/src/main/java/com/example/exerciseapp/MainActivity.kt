@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity(), ExerciseContract.View, TextToSpeech.On
     private lateinit var btnReset: Button
     lateinit var textToSpeech: TextToSpeech
     private lateinit var mediaPlayer: MediaPlayer
-    private var isExercising = false
     private var isMusicPlaying = false
+    private var isSpeaking = false
 
     private val model: ExerciseContract.ExerciseModel =
         ExerciseModelImpl() // Khởi tạo đối tượng ExerciseModelImpl
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(), ExerciseContract.View, TextToSpeech.On
         mediaPlayer.isLooping = true
         mediaPlayer.setVolume(0.5f,0.5f)
 
-        tvExerciseName.text = "Welcome to ExerciseApp"
+        tvExerciseName.text = "Exercise App"
         ivExerciseImage.setImageResource(R.drawable.mainimage)
         //Nut Start
         btnStart.setOnClickListener {
@@ -119,12 +119,20 @@ class MainActivity : AppCompatActivity(), ExerciseContract.View, TextToSpeech.On
         if(isMusicPlaying && mediaPlayer.isPlaying){
             mediaPlayer.pause()
         }
+        if(isSpeaking && textToSpeech.isSpeaking){
+            textToSpeech.stop()
+            isSpeaking = false
+        }
+
     }
 
     override fun onResume() {
         super.onResume()
         if(isMusicPlaying){
             mediaPlayer.start()
+        }
+        if(!isSpeaking && !textToSpeech.isSpeaking){
+            isSpeaking = true
         }
     }
 

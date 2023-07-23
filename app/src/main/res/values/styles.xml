@@ -1,0 +1,3 @@
+<resources>
+    <style name="ExerciseApp" parent="Theme.AppCompat.DayNight.NoActionBar"/>
+</resources>
